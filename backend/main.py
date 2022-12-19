@@ -15,5 +15,6 @@ def get_light_status(response: Response):
 
 @app.patch("/light")
 def flip_light_status():
+    global switch 
     switch = not switch
     return None
