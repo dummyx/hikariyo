@@ -1,12 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './assets/iwi.png'
 import './App.css';
 
+
+
 function App() {
+  function doClick() {
+    console.log("clicked")
+  }
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <button onClick={doClick}>
+          <img src={logo} className="App-logo" alt="iwi" />
+        </button>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
