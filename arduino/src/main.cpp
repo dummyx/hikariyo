@@ -79,8 +79,9 @@ void loop()
   }
   else
   {
-    if (!isAtHome)
+    if (!isAtHome && isLightOn)
     {
+      show(String("Light left on, turning off"));
       turnLightOff();
     }
   }
@@ -92,7 +93,7 @@ void turnLightOff()
 {
   irsend.sendNEC(fullLightData);
   show(String("Turning light off."));
-  delay(200);
+  delay(500);
   irsend.sendNEC(switchData);
 }
 
