@@ -46,6 +46,8 @@ void setup()
   irsend.begin();
   Serial.begin(kBaudRate, SERIAL_8N1);
 
+  pinMode(LIGHT_READ_PIN, INPUT);
+
   setClock();
 }
 
@@ -64,18 +66,27 @@ void loop()
   }
 
   command = fakeGet(GET_COMMAND_URL);
-  if (command == 221) {
-    if (isLightOn) {
+  if (command == 221)
+  {
+    if (isLightOn)
+    {
       turnLightOff();
     }
-    else {
+    else
+    {
       turnLightOn();
+    }
+  }
+  else
+  {
+    if (!isAtHome)
+    {
+      turnLightOff();
     }
   }
 
   delay(1000);
 }
-
 
 void turnLightOff()
 {
@@ -99,8 +110,6 @@ void show(String s)
 
 bool checkLight()
 {
-  uint16_t lightValue = analogRead(LIGHT_READ_PIN);
-
-  // More light, lower value.
-  return lightValue < lightThreshold;
+  // 0 when bright.
+  return digitalRead(LIGHT_READ_PIN) == 0;
 }
