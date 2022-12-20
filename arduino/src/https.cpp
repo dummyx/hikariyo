@@ -37,7 +37,7 @@ const char* rootCACertificate =
 "-----END CERTIFICATE-----\n";
 
 void setClock() {
-  configTime(0, 0, "pool.ntp.org");
+  configTime(0, 0, "ntp.nict.jp");
 
   Serial.print(F("Waiting for NTP time sync: "));
   time_t nowSecs = time(nullptr);
@@ -64,17 +64,11 @@ int fakeGet(String url) {
 
     {
       HTTPClient https;
-  
-
       if (https.begin(*client, url)) {
      
         httpCode = https.GET();
   
-        if (httpCode > 0) {
-          if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
-            String payload = https.getString();
-          }
-        } else {
+        if (httpCode < 0) {
           Serial.printf("[HTTPS] GET... failed, error: %s\n", https.errorToString(httpCode).c_str());
         }
   
