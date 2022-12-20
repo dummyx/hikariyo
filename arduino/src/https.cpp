@@ -69,7 +69,7 @@ int fakeGet(String url) {
         httpCode = https.GET();
   
         if (httpCode < 0) {
-          Serial.printf("[HTTPS] GET... failed, error: %s\n", https.errorToString(httpCode).c_str());
+          Serial.printf("[HTTPS] GET... failed, error.\n");
         }
   
         https.end();
