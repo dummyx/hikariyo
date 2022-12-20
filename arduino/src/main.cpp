@@ -91,9 +91,7 @@ void loop()
 
 void turnLightOff()
 {
-  irsend.sendNEC(fullLightData);
   show(String("Turning light off."));
-  delay(500);
   irsend.sendNEC(switchData);
 }
 
@@ -111,6 +109,6 @@ void show(String s)
 
 bool checkLight()
 {
-  // 0 when bright.
-  return digitalRead(LIGHT_READ_PIN) == 0;
+  // The brighter the lower.
+  return analogRead(LIGHT_READ_PIN) < lightThreshold;
 }

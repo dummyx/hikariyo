@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Response
 
-app = FastAPI()
+from settings import SECRET
 
-switch = False
+app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
 # 222: empty
 # 221: switch
@@ -18,12 +18,16 @@ def get_light_status():
     }
 
 @app.get("/set_on")
-def set_on():
+def set_on(secret: str):
+    if secret != SECRET:
+        return None
     global is_on
     is_on = True
 
 @app.get("/set_off")
-def set_off():
+def set_off(secret: str):
+    if secret != SECRET:
+        return None
     global is_on
     is_on = False
     
@@ -36,6 +40,9 @@ def get_command(response: Response):
     command = 222
     
 @app.post("/set_command")
-def set_command():
+def set_command(secret: str):
+    if secret != SECRET:
+        return None
+
     global command
     command = 221
