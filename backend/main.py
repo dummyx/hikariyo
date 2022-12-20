@@ -35,3 +35,7 @@ def get_command(response: Response):
     # Clear command.
     command = 222
     
+@app.post("/set_command")
+def set_command():
+    global command
+    command = 221
