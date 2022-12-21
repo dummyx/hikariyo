@@ -53,40 +53,26 @@ void setup()
 
 void loop()
 {
-  isAtHome = Ping.ping(remote_ip);
   isLightOn = checkLight();
 
-  if (isLightOn)
-  {
-    fakeGet(SET_ON_URL);
-  }
-  else
-  {
-    fakeGet(SET_OFF_URL);
-  }
+  isLightOn ? fakeGet(SET_ON_URL) : fakeGet(SET_OFF_URL);
 
   command = fakeGet(GET_COMMAND_URL);
   if (command == 221)
   {
-    if (isLightOn)
-    {
-      turnLightOff();
-    }
-    else
-    {
-      turnLightOn();
-    }
+    isLightOn ? turnLightOff() : turnLightOn();
   }
-  else
+  else if (isLightOn)
   {
-    if (!isAtHome && isLightOn)
+    isAtHome = Ping.ping(remote_ip);
+    if (!isAtHome)
     {
       show(String("Light left on, turning off"));
       turnLightOff();
     }
   }
 
-  delay(1000);
+  delay(2000);
 }
 
 void turnLightOff()
@@ -97,8 +83,8 @@ void turnLightOff()
 
 void turnLightOn()
 {
-  irsend.sendNEC(fullLightData);
   show(String("Turning light on."));
+  irsend.sendNEC(fullLightData);
 }
 
 void show(String s)
