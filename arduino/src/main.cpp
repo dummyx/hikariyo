@@ -69,7 +69,7 @@ void loop()
   isLightOn = checkLight(lightValue);
   env = readEnv();
 
-  // isLightOn ? fakeGet(SET_ON_URL) : fakeGet(SET_OFF_URL);
+  isLightOn ? fakeGet(SET_ON_URL) : fakeGet(SET_OFF_URL);
 
   command = fakeGet(GET_COMMAND_URL);
   if (command == 221)
