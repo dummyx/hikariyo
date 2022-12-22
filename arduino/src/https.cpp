@@ -82,5 +82,6 @@ int fakeGet(String url) {
     return httpCode;
   } else {
     Serial.println("Unable to create client");
+    return -1;
   }
 }
