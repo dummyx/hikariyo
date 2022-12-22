@@ -25,7 +25,7 @@ app.add_middleware(
 # 221: switch
 command = 222
 
-data: dict[str, list[dict[str, int | str]]] = {
+data: dict[str, list[dict[str, int | str | float]]] = {
     "data": []
 }
 
@@ -71,7 +71,13 @@ def set_command(secret: str):
     command = 221
 
 @app.get("/upload_data")
-def upload(value: int, secret: str):
+def upload(
+    secret: str, 
+    light: int, 
+    temperature: float, 
+    humidity: float,
+    pressure: float
+    ):
     if secret != SECRET:
         return None
 
@@ -79,7 +85,10 @@ def upload(value: int, secret: str):
     time_string = datetime.now().isoformat()
     data["data"].append({
         "time": time_string,
-        "value": value,
+        "light": light,
+        "temperature": temperature,
+        "humidity": humidity,
+        "pressure": pressure
     })
 
 @app.get("/get_data")
