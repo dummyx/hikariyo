@@ -51,7 +51,10 @@ def set_command(secret: str):
     command = 221
 
 @app.get("/upload_data")
-def upload(value: int):
+def upload(value: int, secret: str):
+    if secret != SECRET:
+        return None
+
     global data
     time_string = datetime.now().isoformat()
     data[time_string] = value
