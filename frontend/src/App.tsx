@@ -3,7 +3,6 @@ import Control from "./components/Control";
 import LightBulb from "./components/LightBulb";
 
 function App() {
-  
   return (
     <div className="App">
       <LightBulb />

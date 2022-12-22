@@ -16,7 +16,7 @@ function Control() {
       <button onClick={doClick}>
         <img src={logo} className="App-logo" alt="iwi" />
       </button>
-      <br/>
+      <br />
       <input
         type="password"
         placeholder="password"
