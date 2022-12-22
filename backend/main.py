@@ -9,17 +9,19 @@ app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 # 221: switch
 command = 222
 
-data: dict[str, list[dict]] = {
+data: dict[str, list[dict[str, int]]] = {
     "data":[]
 }
 
 is_on = False
 
+LIGHT_THRESHOLD = 2300
+
 # For frontend.
 @app.get("/light")
 def get_light_status():
     return {
-        "light" : is_on
+        "light" : data["data"][-1] < LIGHT_THRESHOLD
     }
 
 @app.get("/set_on")
