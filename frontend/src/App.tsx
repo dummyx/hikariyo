@@ -1,3 +1,5 @@
+import "./App.css";
+
 import Chart from "./components/Charts";
 import Control from "./components/Control";
 import LightBulb from "./components/LightBulb";
