@@ -25,7 +25,9 @@ function App() {
           onChange={(e) => setSecret(e.target.value)}
         />
       </header>
-      <Chart />
+      <div>
+        <Chart />
+      </div>
     </div>
   );
 }

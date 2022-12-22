@@ -38,7 +38,10 @@ export const options = {
 
 type Data = {
   time: string;
-  value: number;
+  light: number;
+  temperature: number;
+  humidity: number;
+  pressure: number;
 };
 
 type GetDataType = {
@@ -47,7 +50,7 @@ type GetDataType = {
 
 function Chart() {
   const [data, setData] = useState<GetDataType>({
-    data: [{ time: "", value: 0 }],
+    data: [{ time: "", light: 0, temperature: 0, humidity: 0, pressure: 0 }],
   });
 
   useEffect(() => {
@@ -65,7 +68,19 @@ function Chart() {
     datasets: [
       {
         label: "Raw birghtness value",
-        data: list.map((entry) => entry.value),
+        data: list.map((entry) => entry.light),
+      },
+      {
+        label: "Temperature",
+        data: list.map((entry) => entry.temperature),
+      },
+      {
+        label: "Humidity",
+        data: list.map((entry) => entry.humidity),
+      },
+      {
+        label: "Pressure",
+        data: list.map((entry) => entry.pressure),
       },
     ],
   };
