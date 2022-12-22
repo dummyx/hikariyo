@@ -1,9 +1,24 @@
 from fastapi import FastAPI, Response
 
-from settings import SECRET
+from settings import SECRET, SERVER_URL
 from datetime import datetime
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+
+origins = [
+    SERVER_URL,
+    "http://localhost",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # 222: empty
 # 221: switch
