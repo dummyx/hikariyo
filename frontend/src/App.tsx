@@ -1,12 +1,17 @@
-import React from 'react';
-import logo from './assets/iwi.png'
-import './App.css';
+import React, { useState } from "react";
+import logo from "./assets/iwi.png";
+import "./App.css";
+import settings from "./settings.json";
 
-
+import Chart from "./components/Charts";
 
 function App() {
+  const [secret, setSecret] = useState("");
+
   function doClick() {
-    console.log("clicked")
+    fetch(`${settings.server_url}set_command?secret=${secret}`, {
+      method: "POST",
+    });
   }
   return (
     <div className="App">
@@ -14,18 +19,13 @@ function App() {
         <button onClick={doClick}>
           <img src={logo} className="App-logo" alt="iwi" />
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <input
+          type="password"
+          placeholder="password"
+          onChange={(e) => setSecret(e.target.value)}
+        />
       </header>
+      <Chart />
     </div>
   );
 }
