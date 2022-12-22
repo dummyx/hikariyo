@@ -9,7 +9,9 @@ app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 # 221: switch
 command = 222
 
-data: dict[str, int] = {}
+data: dict[str, list[dict]] = {
+    "data":[]
+}
 
 is_on = False
 
@@ -57,7 +59,9 @@ def upload(value: int, secret: str):
 
     global data
     time_string = datetime.now().isoformat()
-    data[time_string] = value
+    data["data"].append({
+        time_string: value
+    })
 
 @app.get("/get_data")
 def get_data():
