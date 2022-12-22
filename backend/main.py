@@ -1,12 +1,15 @@
 from fastapi import FastAPI, Response
 
 from settings import SECRET
+from datetime import datetime
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
 # 222: empty
 # 221: switch
 command = 222
+
+data: dict[str, int] = {}
 
 is_on = False
 
@@ -46,3 +49,15 @@ def set_command(secret: str):
 
     global command
     command = 221
+
+@app.get("/upload_data")
+def upload(value: int):
+    global data
+    time_string = datetime.now().isoformat()
+    data[time_string] = value
+
+@app.get("/get_data")
+def get_data():
+    global data
+    return data
+
