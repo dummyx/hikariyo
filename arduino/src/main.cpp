@@ -12,7 +12,6 @@
 
 #include "settings.h"
 
-
 const char *ssid = WIFI_SSID;
 const char *password = WIFI_PASSWORD;
 
@@ -25,16 +24,9 @@ const IPAddress SMARTPHONE_IP;
 
 // For RE0208 remote control CH1
 
-
 uint32_t kBaudRate = 115200;
 
-struct dataPacket {
-
-};
-
 uint16_t lightValue;
-
-
 
 void setup()
 {
@@ -89,13 +81,15 @@ void loop()
   Serial.printf("%f, %f, %f\n", env.temperature, env.humidity, env.pressure);
 
   counter++;
-  if (counter > 20  ) {
+  if (counter > 20)
+  {
     uploadData(lightValue, env.temperature, env.humidity, env.pressure);
   }
   delay(2000);
 }
 
-void uploadData(uint16_t light, float temp, float humi, float pres) {
+void uploadData(uint16_t light, float temp, float humi, float pres)
+{
   char uploadUrl[200];
   sprintf(uploadUrl, UPLOAD_DATA_URL, light, temp, humi, pres);
   fakeGet(uploadUrl);
